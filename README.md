@@ -20,8 +20,8 @@ This project follows a phase-centric organization:
   - `python/`: Core logic (Orchestrator, LLM Client, Voice Engines).
   - `scripts/`: Initialization, calibration, and diagnostic utilities.
   - `data/`: Persistent storage for conversation history and vector databases.
+  - `demo/`: Contains demonstration videos of Phase 1 and Phase 1.1 (Memory Improvements).
   - `docs/`: Technical specifications and TechStack summaries.
-  - `demo/`: [Placeholder] Demo videos and assets.
 
 ## ⚙️ TechStack
 
