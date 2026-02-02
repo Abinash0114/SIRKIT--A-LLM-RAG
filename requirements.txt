@@ -1,0 +1,7 @@
+sounddevice
+numpy
+openwakeword
+faster-whisper
+ollama
+pyttsx3
+colorama

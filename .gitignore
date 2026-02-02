@@ -1,0 +1,10 @@
+.venv/
+__pycache__/
+*.wav
+*.pyc
+.vscode/
+SIRKIT_DATA/vector_db/
+error_trace.txt
+devices*.txt
+full_device_list.txt
+test_mic_output.wav
