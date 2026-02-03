@@ -1,20 +1,22 @@
-# SIRKIT - Local Intelligent Voice Assistant (Phase 1 v2)
+# SIRKIT - Local Intelligent Voice Assistant (Phase 3)
 
 SIRKIT is a sophisticated, privacy-centric voice assistant designed to operate entirely on local hardware. By leveraging state-of-the-art local LLMs, quantized speech-to-text models, and persistent vector databases, SIRKIT provides an intelligent, context-aware experience without the need for internet connectivity or third-party API keys.
 
 > [!IMPORTANT]
-> This repository represents the **Phase 1 (v2)** implementation, uniting core connectivity, memory persistence, and RAG intelligence into a professional, production-ready structure.
+> This repository represents the **Phase 3** implementation, now featuring **Computer Vision**, **Active File Monitoring**, and **Remote Camera Control**.
 
 ---
 
 ## 🚀 Key Features
 
-- **Multimodal Interaction**: Seamlessly switch between "Hey Jarvis" voice activation and a responsive text-based GUI.
-- **Persistent Long-Term Memory (RAG)**: Automatically indexes every conversation turn into a local ChromaDB instance, allowing the assistant to recall historical context across sessions.
+- **Vision & Camera Control**: Take pictures ("Click", "Capture") via voice or text. Local OpenCV integration stores images directly to your workspace.
+- **Active File Monitoring**: Real-time tracking of file creations, deletions, and modifications. The assistant automatically reads and indexes new files.
+- **Multimodal Interaction**: Seamlessly switch between "Hey Jarvis" voice activation and a responsive text-based GUI with Drag-and-Drop support.
+- **Persistent Long-Term Memory (RAG)**: Automatically indexes every conversation turn and workspace file into a local ChromaDB instance.
 - **Short-Term Session Memory**: maintains the last 10 turns of conversation in real-time history for coherent, multi-turn dialogue.
-- **Turbo-Sensitive Wake-Word**: Optimized ONNX models with 4x software gain ensure reliable "Hey Jarvis" detection even in noisy environments.
-- **Noisy Silence Detection (VAD)**: Energy-based Voice Activity Detection dynamically clips audio segments, improving transcription speed and accuracy.
-- **Privacy Core**: 100% of audio and text data remains on your machine.
+- **Turbo-Sensitive Wake-Word**: Optimized ONNX models with 4x software gain ensure reliable "Hey Jarvis" detection.
+- **Noisy Silence Detection (VAD)**: Energy-based Voice Activity Detection dynamically clips audio segments.
+- **Privacy Core**: 100% of audio, video, and text data remains on your machine.
 
 ---
 
@@ -25,7 +27,6 @@ SIRKIT's personality and logic are governed by a strictly defined system prompt 
 ```text
 You are SIRKIT, an advanced local voice assistant. 
 Your personality is helpful, concise, and realistic. 
-DO NOT repeat introductory phrases like 'I am your assistant' unless specifically asked. 
 Maintain a natural conversation flow using the history provided. 
 If local context is provided, use it for accurate, data-driven answers.
 ```
@@ -39,9 +40,10 @@ If local context is provided, use it for accurate, data-driven answers.
 | **Brain (LLM)** | **Ollama / Llama 3.2 3B** | Fast CPU inference using 4-bit quantization. |
 | **Hearing (STT)** | **Faster-Whisper** | `base` model with `int8` compute for a balance of speed and accuracy. |
 | **Voice (TTS)** | **pyttsx3** | Native SAPI5/NSSpeechSynthesizer integration for zero-latency speech. |
+| **Vision** | **OpenCV** | Real-time camera session management and frame capture. |
 | **Memory (RAG)** | **ChromaDB** | High-performance vector store with `SentenceTransformer` embeddings. |
-| **Triggers (WW)** | **OpenWakeWord** | ONNX-driven detection for "Hey Jarvis". |
-| **Interface** | **Tkinter** | Standard Python GUI with non-blocking threaded backend. |
+| **Monitoring** | **Watchfiles** | Asynchronous file system event tracking. |
+| **Interface** | **Tkinter + DnD** | Standard Python GUI with Drag-and-Drop and threaded backend. |
 
 ---
 
@@ -52,6 +54,8 @@ Phase1-2/
 ├── python/           # Core Orchestrator & Backend Logic
 │   ├── main.py           # GUI & Main Initialization
 │   ├── llm_client.py     # Ollama & RAG Integration
+│   ├── camera_engine.py  # Vision & Capture Logic
+│   ├── file_monitor.py   # Active File System Watcher
 │   ├── voice_engine.py   # STT, TTS, and Wake-Word Logic
 │   ├── memory_manager.py # JSON-based Session Persistence
 │   ├── rag_engine.py     # ChromaDB Vector Management

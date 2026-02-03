@@ -5,3 +5,7 @@ faster-whisper
 ollama
 pyttsx3
 colorama
+watchfiles
+opencv-python
+tkinterdnd2
+Pillow

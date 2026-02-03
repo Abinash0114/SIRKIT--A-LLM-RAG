@@ -1,14 +1,19 @@
-# Phase 1 v2 - Project Details
+# Phase 3 - Camera & Vision Integration
 
-This document outlines the progress and implementation details of the merged Phase 1 and Phase 2.
+This document outlines the progress and implementation details of Phase 3, building upon the foundations of Phase 1 and 2.
 
 ## Implementation Overview
-- **VAD (Voice Activity Detection)**: Implemented energy-based silence detection with a 1.2s trailing window.
-- **Digital Gain**: Implemented 4.0x software amplification to improve mic responsiveness.
-- **RAG Integration**: Conversations are auto-indexed to ensure the assistant "learns" from every interaction.
-- **Session Continuity**: Implementation of `MemoryManager` to preserve context between app restarts.
+- **Vision Engine**: Integrated `OpenCV` for real-time camera access, persistent video sessions, and frame capture.
+- **Active File Monitoring**: Implemented `watchfiles` to detect file system changes (add/delete/modify) and automatically sync them with the RAG engine in real-time.
+- **Remote Camera Control**: Added ability to control camera via text commands in addition to voice ("capture", "click", "decapture").
+- **Drag & Drop**: Enhanced GUI with `tkinterdnd2` to allow dragging files directly into the assistant's workspace.
+- **VAD & Audio**: Continued refinement of Voice Activity Detection and digital gain (4.0x) for robust hearing.
 
 ## Directory Significance
-- `python/`: contains the primary `main.py` entry point and logic components.
-- `scripts/`: contains `calibrate_wakeword.py` to optimize trigger sensitivity.
-- `data/`: contains the `SIRKIT_DATA` folder which holds the SQLite-backed vector store.
+- `python/`: 
+    - `camera_engine.py`: Handles webcam sessions and image saving.
+    - `file_monitor.py`: Watches for file changes and triggers RAG updates.
+    - `main.py`: Updated GUI and orchestrator logic.
+- `scripts/`: Diagnostic tools including `calibrate_wakeword.py` and `list_devices.py`.
+- `data/`: Central storage (`SIRKIT_DATA`) for images, vector DB, and logs.
+

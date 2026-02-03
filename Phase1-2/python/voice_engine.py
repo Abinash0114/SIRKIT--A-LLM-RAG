@@ -8,6 +8,7 @@ and Text-to-Speech (pyttsx3) synthesis. It also implements Energy-based VAD
 
 import os
 import sys
+import threading
 import numpy as np
 import sounddevice as sd
 from openwakeword.model import Model
@@ -33,6 +34,7 @@ class VoiceEngine:
 
         # TTS Initialization
         self.tts_engine = pyttsx3.init()
+        self.tts_lock = threading.Lock()
         self.setup_tts_voice()
 
     def setup_tts_voice(self):
@@ -73,8 +75,8 @@ class VoiceEngine:
 
     def listen_and_transcribe(self):
         fs, chunk_size = 16000, 1024
-        max_silent_chunks = int(1.2 * fs / chunk_size)
-        max_total_chunks = int(15 * fs / chunk_size)
+        max_silent_chunks = int(config.SILENCE_DURATION * fs / chunk_size)
+        max_total_chunks = int(20 * fs / chunk_size)
         
         recording, silent_chunks, total_chunks = [], 0, 0
         
@@ -98,9 +100,10 @@ class VoiceEngine:
         return "".join([s.text for s in segments]).strip()
 
     def speak(self, text):
-        print(f"SIRKIT: {text}")
-        self.tts_engine.say(text)
-        self.tts_engine.runAndWait()
+        with self.tts_lock:
+            print(f"SIRKIT: {text}")
+            self.tts_engine.say(text)
+            self.tts_engine.runAndWait()
 
 if __name__ == "__main__":
     v = VoiceEngine()

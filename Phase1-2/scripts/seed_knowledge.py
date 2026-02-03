@@ -10,21 +10,23 @@ from rag_engine import RAGEngine
 def initialize_knowledge():
     rag = RAGEngine()
     
-    # Core Identity
+    # Clean up old sensitive data if it exists
+    try:
+        # Delete old project_phases if it exists
+        rag.collection.delete(ids=["project_phases"])
+        print("Cleared legacy project context.")
+    except:
+        pass
+
+    # Core Identity - Generic and Safe
     rag.add_text(
-        "I am SIRKIT, a local voice assistant running on Llama 3.2, Faster-Whisper, and RAG.",
+        "I am SIRKIT, a local voice assistant designed for privacy and speed. "
+        "I can help you manage your local files, answer questions using RAG, "
+        "and assist with various tasks entirely offline.",
         doc_id="about_sirkit"
     )
     
-    # Project Context
-    rag.add_text(
-        "The SIRKIT project is structured in phases: "
-        "Phase 1: Connectivity & Core; Phase 2: Intelligence & RAG; "
-        "Phase 3: Camera & Files; Phase 4: Extended Multi-Camera.",
-        doc_id="project_phases"
-    )
-
-    print("Success: RAG Seeded.")
+    print("Success: RAG Reset and Seeded.")
 
 if __name__ == "__main__":
     initialize_knowledge()

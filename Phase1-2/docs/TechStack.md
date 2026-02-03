@@ -1,4 +1,4 @@
-# SIRKIT TechStack Summary (Phase 1 v2)
+# SIRKIT TechStack Summary (Phase 3)
 
 The SIRKIT architecture is designed for low-latency, modularity, and 100% local operation.
 
@@ -9,9 +9,12 @@ The SIRKIT architecture is designed for low-latency, modularity, and 100% local 
 | **Speech-to-Text** | **Faster-Whisper (base)** | High-accuracy transcription with int8 quantization for CPU efficiency. |
 | **Vector DB** | **ChromaDB** | Persistent storage for long-term associative memory. |
 | **Wake Word** | **OpenWakeWord** | ONNX-based efficient trigger word detection. |
+| **Vision** | **OpenCV** | Efficient real-time frame capture and image processing. |
+| **Monitoring** | **Watchfiles** | High-performance asynchronous file system monitoring. |
 
 ## Frontend & UI
 - **Tkinter**: Lightweight, standard Python library for the main dashboard.
+- **TkinterDnD2**: Drag-and-drop file support for the GUI.
 - **Threading**: Managed parallel execution for non-blocking UI and backend processing.
 
 ## Persistent Storage

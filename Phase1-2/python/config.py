@@ -12,10 +12,11 @@ INPUT_DEVICE_ID = 0  # Microsoft Sound Mapper
 SENSITIVITY_GAIN = 4.0
 
 # Detection & Conversation Logic
-WAKE_WORD = "Jarvis"
+WAKE_WORD = "Hey Jarvis Listen"
 TRIGGER_WORD = "hey_jarvis"
-WAKE_WORD_THRESHOLD = 0.25
+WAKE_WORD_THRESHOLD = 0.35
 SILENCE_THRESHOLD = 0.003
+SILENCE_DURATION = 3.0
 
 # LLM Backend
 LLM_MODEL = "llama3.2:3b"
@@ -26,3 +27,10 @@ BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 # Data is now stored in the sibling 'data' directory
 DATA_DIR = os.path.abspath(os.path.join(BASE_DIR, "..", "data", "SIRKIT_DATA"))
 VECTOR_DB_DIR = os.path.join(DATA_DIR, "vector_db")
+IMAGES_DIR = os.path.join(DATA_DIR, "images")
+TESTER_DIR = os.path.join(IMAGES_DIR, "tester")
+
+# Ensure directories exist
+for d in [DATA_DIR, VECTOR_DB_DIR, IMAGES_DIR, TESTER_DIR]:
+    if not os.path.exists(d):
+        os.makedirs(d)
